@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { GamesListComponent } from './components/games-list/games-list.component';
 import { GameFormComponent } from './components/game-form/game-form.component';
+import { TableFiltroComponent } from './components/table-filtro/table-filtro.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'contenido',
     component: GamesListComponent
+  },
+  {
+    path: 'contenido/reporte',
+    component: TableFiltroComponent
   },
   {
     path: 'contenido/add',

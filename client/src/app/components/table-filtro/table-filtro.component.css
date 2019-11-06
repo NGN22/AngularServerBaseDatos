@@ -1,0 +1,25 @@
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  form{
+    padding-bottom: 30px;
+  }
+  .primary{
+    background: orange;
+    color: white;
+  }
+  
+  .date-block{
+    display: flex;
+  }
+  .date-block__list{
+    flex-basis: 150px;
+    margin-right: 15px;
+  }
