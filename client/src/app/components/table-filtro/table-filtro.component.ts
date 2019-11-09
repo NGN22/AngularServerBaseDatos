@@ -14,7 +14,7 @@ import { GamesService } from 'src/app/services/games.service';
 
 export class TableFiltroComponent {
   games: any = [];
-  displayedColumns: string[] = ['id', 'title', 'description', 'created_at', 'image'];
+  displayedColumns: string[] = ['id_contenido', 'titulo', 'extension', 'fec_publicacion', 'image'];
   dataSource // = new MatTableDataSource(this.games);
   pipe: DatePipe;
 
@@ -23,8 +23,7 @@ filterForm = new FormGroup({
     toDate: new FormControl(),
 });
 
-get fromDate() { console.log() ;
-  return this.filterForm.get('fromDate').value; }
+get fromDate() {  return this.filterForm.get('fromDate').value; }
 get toDate() { return this.filterForm.get('toDate').value; }
 
   constructor(private gameService: GamesService) {
@@ -40,7 +39,7 @@ get toDate() { return this.filterForm.get('toDate').value; }
           this.pipe = new DatePipe('en');
           this.dataSource.filterPredicate = (data, filter) => {
             if (this.fromDate && this.toDate) {
-              return new Date(data.created_at) >= this.fromDate && new Date(data.created_at) <= this.toDate;
+              return new Date(data.fec_publicacion) >= this.fromDate && new Date(data.fec_publicacion) <= this.toDate;
             }
             return true;
           };

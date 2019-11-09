@@ -3,13 +3,13 @@
     <div class="card-body">
       <form action="">
         <div class="form-group">
-          <input type="text" name="title" [(ngModel)]="game.title" placeholder="Titulo" class="form-control" autofocus>
+          <input type="text" name="titulo" [(ngModel)]="game.titulo" placeholder="Titulo" class="form-control" autofocus>
         </div>
         <div class="form-group">
-          <input type="text" name="ext" placeholder="Extensión" class="form-control">
+          <input type="text" name="extension" [(ngModel)]="game.extension" placeholder="extension" class="form-control">
         </div>
         <div class="form-group">
-          <textarea name="description" [(ngModel)]="game.description" rows="2" placeholder="Descripcion" class="form-control"></textarea>
+          <textarea name="description" rows="2" placeholder="Descripcion" class="form-control"></textarea>
         </div>
         <div class="form-group">
           <input type="url" name="image URL" [(ngModel)]="game.image" placeholder="Imagen" class="form-control">
@@ -25,8 +25,8 @@
 <div class="col-md-4">
   <div class="card card-body text-center">
   <img [src]="game.image == '' ? '/assets/noimage.png' : game.image" alt="No Image" class="card-img-top">
-    <h3>{{game.id}}. {{game.title == '' ? 'Titulo' : game.title}}</h3>
-    <p>{{game.description == '' ? 'Escriba una descripcion' : game.description}}</p>
-    <p>{{game.created_at | date: 'dd-MM-yyyy'}}</p>
+    <h3>{{game.id_contenido}}. {{game.titulo == '' ? 'Titulo' : game.titulo}}</h3>
+    <p>{{game.extension == '' ? 'Escriba una extension' : game.extension}}</p>
+    <p>{{game.fec_publicacion | date: 'dd-MM-yyyy'}}</p>
   </div>
 </div>

@@ -14,11 +14,11 @@ export class GameFormComponent implements OnInit {
   @HostBinding('class') clases = 'row';
 
   game: Game = {
-    id: 0,
-    title: '',
-    description: '',
+    id_contenido: 0,
+    titulo: '',
+    extension: '',
     image: '',
-    created_at: new Date()
+    fec_publicacion: new Date()
   };
 
   edit: boolean = false;
@@ -41,8 +41,8 @@ export class GameFormComponent implements OnInit {
   }
 
   saveNewGame() {
-    delete this.game.created_at;
-    delete this.game.id;
+    delete this.game.fec_publicacion;
+    delete this.game.id_contenido;
     if (this.game.image === '') {
       this.game.image = '/assets/noimage.png';
     }
@@ -57,8 +57,8 @@ export class GameFormComponent implements OnInit {
   }
 
   updateGame() {
-    delete this.game.created_at;
-    this.gameService.updateGame(this.game.id, this.game)
+    delete this.game.fec_publicacion;
+    this.gameService.updateGame(this.game.id_contenido, this.game)
       .subscribe(
         res => {
           console.log(res);

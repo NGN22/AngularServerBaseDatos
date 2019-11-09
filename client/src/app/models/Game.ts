@@ -1,9 +1,9 @@
 import { Title } from '@angular/platform-browser';
 
 export interface Game {
-    id?: number,
-    title?: string,
-    description?: string,
+    id_contenido?: number,
+    titulo?: string,
+    extension?: string,
     image?: string,
-    created_at?: Date
+    fec_publicacion?: Date
 };
