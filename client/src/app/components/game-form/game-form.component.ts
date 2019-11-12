@@ -2,7 +2,11 @@ import { Component, OnInit, HostBinding } from '@angular/core';
 import { Game } from 'src/app/models/Game';
 
 import { GamesService } from 'src/app/services/games.service';
+import { CargaServiceService } from 'src/app/services/cargaService.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FileItem } from 'src/app/models/fileItem';
+import { NgForm } from '@angular/forms';
+// import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-game-form',
@@ -12,6 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class GameFormComponent implements OnInit {
 
   @HostBinding('class') clases = 'row';
+  archivo: FileItem;
+  estaSobreDrop = false;
 
   game: Game = {
     id_contenido: 0,
@@ -21,9 +27,13 @@ export class GameFormComponent implements OnInit {
     fec_publicacion: new Date()
   };
 
+  extensiones =['video','audio','descargable', 'tu vieja']
   edit: boolean = false;
 
-  constructor(private gameService: GamesService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private gameService: GamesService,
+    public fileService: CargaServiceService,
+    private router: Router, private activatedRoute: ActivatedRoute) { 
+    }
 
   ngOnInit() {
     const params = this.activatedRoute.snapshot.params;
@@ -41,6 +51,8 @@ export class GameFormComponent implements OnInit {
   }
 
   saveNewGame() {
+    console.log('saved')
+    // this.uploadFile()
     delete this.game.fec_publicacion;
     delete this.game.id_contenido;
     if (this.game.image === '') {
@@ -57,6 +69,8 @@ export class GameFormComponent implements OnInit {
   }
 
   updateGame() {
+    
+    this.uploadFile()
     delete this.game.fec_publicacion;
     this.gameService.updateGame(this.game.id_contenido, this.game)
       .subscribe(
@@ -68,4 +82,14 @@ export class GameFormComponent implements OnInit {
       )
   }
 
+  uploadFile(){
+    console.log('aca',this.archivo)
+    this.archivo.id = this.game.id_contenido as unknown as string
+    this.fileService.cargarArchivo( this.archivo )
+    this.archivo = null
+  }
+
+  save(forma: NgForm){
+    console.log('aca',forma)
+  }
 }

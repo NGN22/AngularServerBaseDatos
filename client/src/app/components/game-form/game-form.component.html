@@ -1,22 +1,37 @@
-<div class="col-md-4 offset-md-2">
+<div class="col-md-4 ">
   <div class="card">
     <div class="card-body">
-      <form action="">
+      <form (ngSubmit)="edit ? updateGame() : saveNewGame()" #forma="ngForm">
         <div class="form-group">
-          <input type="text" name="titulo" [(ngModel)]="game.titulo" placeholder="Titulo" class="form-control" autofocus>
+          <input type="text" name="titulo" [(ngModel)]="game.titulo" placeholder="Titulo" class="form-control" autofocus
+            required minlength="5" maxlength="45">
         </div>
-        <div class="form-group">
-          <input type="text" name="extension" [(ngModel)]="game.extension" placeholder="extension" class="form-control">
-        </div>
+
+        <select [(ngModel)]="game.extension" class="form-control" type="ext" name="ext">
+          <option *ngFor="let ext of extensiones" [value]="ext">
+            {{ext}}
+          </option>
+        </select>
+
         <div class="form-group">
           <textarea name="description" rows="2" placeholder="Descripcion" class="form-control"></textarea>
         </div>
         <div class="form-group">
           <input type="url" name="image URL" [(ngModel)]="game.image" placeholder="Imagen" class="form-control">
         </div>
-        <button class="btn btn-success btn-block" (click)="edit ? updateGame() : saveNewGame()">
-          Guardar
-        </button>
+
+        <div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="input-group col-md-8">
+              <button [disabled]="(!archivo)" type="submit" class="btn btn-outline-primary">
+                <!-- <button [disabled]="!archivo" class="btn btn-success btn-block" (click)="edit ? updateGame() : saveNewGame()"> -->
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>
@@ -24,9 +39,35 @@
 
 <div class="col-md-4">
   <div class="card card-body text-center">
-  <img [src]="game.image == '' ? '/assets/noimage.png' : game.image" alt="No Image" class="card-img-top">
+    <img [src]="game.image == '' ? '/assets/noimage.png' : game.image" alt="No Image" class="card-img-top">
     <h3>{{game.id_contenido}}. {{game.titulo == '' ? 'Titulo' : game.titulo}}</h3>
     <p>{{game.extension == '' ? 'Escriba una extension' : game.extension}}</p>
     <p>{{game.fec_publicacion | date: 'dd-MM-yyyy'}}</p>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <div class="card card-body text-center">
+    <h3>Selecione Archivos</h3>
+    <div appNgDropFiles class="well drop-zone" (mouseOver)=" estaSobreDrop=$event "
+      [ngClass]="{ 'file-over': estaSobreDrop }">
+      <h4>Deje caer aquí los archivos</h4>
+      <img src="assets/drop-images.png">
+    </div>
+    <div *ngIf="archivo">
+      <tr>
+        {{ archivo.nombreArchivo }}
+      </tr>
+      <tr>
+        {{ archivo.archivo.size / 1024 /1024 | number: '.2-2' }} MB
+      </tr>
+      <tr>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
+        </div>
+      </tr>
+    </div>
+
+
   </div>
 </div>

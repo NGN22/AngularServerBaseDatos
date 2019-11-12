@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -14,10 +14,10 @@ import { GamesService } from './services/games.service';
 import { GameFormComponent } from './components/game-form/game-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTreeModule } from '@angular/cdk/tree';
 
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -56,8 +56,16 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+//fire
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore'
+import { CargaServiceService } from './services/cargaService.service';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 @NgModule({
   exports: [
@@ -98,9 +106,18 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-  ]
+  ],
+  declarations: [
+    
+  ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+  ],
 })
-export class DemoMaterialModule {}
+export class DemoMaterialModule { }
 
 
 @NgModule({
@@ -110,7 +127,7 @@ export class DemoMaterialModule {}
     GamesListComponent,
     GameFormComponent,
     TableFiltroComponent,
-
+    NgDropFilesDirective
   ],
   entryComponents: [TableFiltroComponent],
   imports: [
@@ -122,10 +139,13 @@ export class DemoMaterialModule {}
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    
   ],
   providers: [
-    GamesService
+    GamesService,
+    CargaServiceService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
