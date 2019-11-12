@@ -52,7 +52,7 @@ export class GameFormComponent implements OnInit {
 
   saveNewGame() {
     console.log('saved')
-    // this.uploadFile()
+    this.uploadFile()
     delete this.game.fec_publicacion;
     delete this.game.id_contenido;
     if (this.game.image === '') {
@@ -89,7 +89,5 @@ export class GameFormComponent implements OnInit {
     this.archivo = null
   }
 
-  save(forma: NgForm){
-    console.log('aca',forma)
-  }
+  
 }
