@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { DatePipe } from '@angular/common';
-import {FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { GamesService } from 'src/app/services/games.service';
+/*importaciones para select*/
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @Component({
@@ -11,20 +16,31 @@ import { GamesService } from 'src/app/services/games.service';
   templateUrl: './table-filtro.component.html',
   styleUrls: ['./table-filtro.component.css']
 })
-
 export class TableFiltroComponent {
+
+  // .pdf
+
+  extensiones = [
+    { valor: 'mp3', muestraValor: 'mp3' },
+    { valor: 'doc', muestraValor: 'doc' },
+    { valor: 'jpg', muestraValor: 'jpg' },
+    { valor: 'wav', muestraValor: 'wav' },
+    { valor: 'mp4', muestraValor: 'mp4' },
+  ];
+
+  seleccionada = this.extensiones[0].valor;
   games: any = [];
   displayedColumns: string[] = ['id_contenido', 'titulo', 'extension', 'fec_publicacion', 'image'];
   dataSource // = new MatTableDataSource(this.games);
   pipe: DatePipe;
 
-filterForm = new FormGroup({
+  filterForm = new FormGroup({
     fromDate: new FormControl(),
     toDate: new FormControl(),
-});
+  });
 
-get fromDate() {  return this.filterForm.get('fromDate').value; }
-get toDate() { return this.filterForm.get('toDate').value; }
+  get fromDate() { return this.filterForm.get('fromDate').value; }
+  get toDate() { return this.filterForm.get('toDate').value; }
 
   constructor(private gameService: GamesService) {
     this.getContenidos();

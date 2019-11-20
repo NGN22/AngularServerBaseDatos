@@ -27,7 +27,7 @@ export class GameFormComponent implements OnInit {
     fec_publicacion: new Date()
   };
 
-  extensiones =['video','audio','descargable', 'tu vieja']
+  extensiones =['mp3','doc','jpg', 'wav', 'mp4']
   edit: boolean = false;
 
   constructor(private gameService: GamesService,
