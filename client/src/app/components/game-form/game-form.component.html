@@ -14,18 +14,19 @@
         </select>
 
         <div class="form-group">
-          <textarea name="description" rows="2" placeholder="Descripcion" class="form-control"></textarea>
+          <textarea name="description" rows="2" placeholder="Descripcion" class="form-control" maxlength="45"></textarea>
         </div>
-        <div class="form-group">
-          <input type="url" name="image URL" [(ngModel)]="game.image" placeholder="Imagen" class="form-control">
-        </div>
-
+        
+        <select [(ngModel)]="game.image" class="form-control" type="image" name="image">
+            <option *ngFor="let image of imagenes" [value]="image.valor">
+              {{image.nombre}}
+            </option>
+          </select>
         <div>
           <div class="form-group row">
             <label class="col-2 col-form-label">&nbsp;</label>
             <div class="input-group col-md-8">
-              <button [disabled]="(!archivo)" type="submit" class="btn btn-outline-primary">
-                <!-- <button [disabled]="!archivo" class="btn btn-success btn-block" (click)="edit ? updateGame() : saveNewGame()"> -->
+              <button [disabled]="!save(forma)" type="submit" class="btn btn-outline-primary">
                 Guardar
               </button>
             </div>

@@ -22,12 +22,16 @@ export class GameFormComponent implements OnInit {
   game: Game = {
     id_contenido: 0,
     titulo: '',
+    fec_publicacion: new Date,
     extension: '',
     image: '',
-    fec_publicacion: new Date()
   };
 
   extensiones =['mp3','doc','jpg', 'wav', 'mp4']
+  imagenes = [{nombre: 'camara' , valor : '/assets/camara.png'},
+  {nombre: 'resproductor' , valor : '/assets/reproductor.png'},
+  {nombre: 'parlante' , valor : '/assets/parlante.jpg'},
+  {nombre: 'auriculares' , valor : '/assets/auriculares.png'}]
   edit: boolean = false;
 
   constructor(private gameService: GamesService,
@@ -89,5 +93,11 @@ export class GameFormComponent implements OnInit {
     this.archivo = null
   }
 
+
+  save(forma: NgForm): boolean{    
+    return this.archivo && (forma.status == 'VALID')
+  }
+
+  
   
 }
