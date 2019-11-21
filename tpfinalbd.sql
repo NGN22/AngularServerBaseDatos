@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `tpfinaldb`.`descargable` (
   CONSTRAINT `fk_Descargable_Contenido`
     FOREIGN KEY (`id_contenido_descargable`)
     REFERENCES `tpfinaldb`.`contenido` (`id_contenido`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `tpfinaldb`.`reproducible` (
   CONSTRAINT `fk_Reproducible_Contenido1`
     FOREIGN KEY (`id_contenido_reproducible`)
     REFERENCES `tpfinaldb`.`contenido` (`id_contenido`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -234,12 +234,21 @@ USE `tpfinaldb` ;
 
 DELIMITER $$
 USE `tpfinaldb`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `INS_CONTENIDO`(in unTitulo varchar(45), in unaFecha DATETIME, in unaExt VARCHAR(45), in unTipo VARCHAR(45), in unaDescr VARCHAR(1000))
+
+--
+-- Funciones
+--
+DROP FUNCTION IF EXISTS `IFEMPTY`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `IFEMPTY` (`s` INT, `defaultValue` INT) RETURNS INT(11) return if(s is null or s = '', defaultValue, s)$$
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INS_CONTENIDO`(in unTitulo varchar(45), in unaFecha DATETIME, in unaExt VARCHAR(45), in unTipo VARCHAR(45), in unaDescr VARCHAR(1000), IN `unaImg` VARCHAR(255))
 BEGIN
 	DECLARE id int;
-    set id = (SELECT max(id_contenido)+1 FROM tpfinaldb.contenido);
-	INSERT INTO tpfinaldb.contenido (id_contenido,titulo,fec_publicacion,extension,tipo, descripcion) 
-    VALUES (id, unTitulo, unaFecha, unaExt, unTipo, unaDescr);
+    set id = (SELECT IFEMPTY(max(id_contenido), 0)+1 FROM tpfinaldb.contenido);
+
+	INSERT INTO tpfinaldb.contenido (id_contenido,titulo,fec_publicacion,extension,tipo, descripcion, image) 
+    VALUES (id, unTitulo, unaFecha, unaExt, unTipo, unaDescr, unaImg);
     
     if(unTipo="reproducible")
 		THEN
@@ -248,6 +257,8 @@ BEGIN
 			INSERT INTO tpfinaldb.descargable values (id);
 	end if;
 END$$
+
+
 
 DELIMITER ;
 

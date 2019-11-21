@@ -21,7 +21,9 @@ class GamesController {
     }
 
     public async create(req: Request, res: Response): Promise<void> {
-        const result = await pool.query('INSERT INTO contenido set ?', [req.body]);
+        console.log(req.body);
+        //const result = await pool.query('INSERT INTO contenido set ?', [req.body]);
+
         res.json({ message: 'Contenido Guardado' });
     }
 

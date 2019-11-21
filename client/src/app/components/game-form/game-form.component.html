@@ -14,7 +14,7 @@
         </select>
 
         <div class="form-group">
-          <textarea name="description" rows="2" placeholder="Descripcion" class="form-control" maxlength="45"></textarea>
+          <textarea [(ngModel)]="game.descripcion" name="descripcion" rows="2" placeholder="Descripcion" class="form-control" maxlength="45"></textarea>
         </div>
         
         <select [(ngModel)]="game.image" class="form-control" type="image" name="image">
