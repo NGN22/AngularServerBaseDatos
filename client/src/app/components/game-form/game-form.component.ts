@@ -75,7 +75,7 @@ export class GameFormComponent implements OnInit {
 
   updateGame() {
     this.uploadFile();
-    delete this.game.fec_publicacion;
+    //this.game.fec_publicacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
     this.gameService.updateGame(this.game.id_contenido, this.game)
       .subscribe(
         res => {
