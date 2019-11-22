@@ -32,7 +32,8 @@
     <div class="card">
       <div class="card-body">
         <mat-form-field>
-          <mat-select placeholder="extension" [(ngModel)]="seleccionada" name="extension">
+          <mat-select placeholder="extension" [(ngModel)]="seleccionada" (selectionChange)="select(seleccionada)"
+            name="extension">
             <mat-option *ngFor="let op of extensiones" [value]="op.valor">
               {{op.muestraValor}}
             </mat-option>
@@ -41,9 +42,14 @@
       </div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-body">
+        <input (keyup)="onKey($event)" [(ngModel)]="values" placeholder="ingrese titulo a buscar">
+    </div>
+  </div>
 </div>
 <div class="row mt-2">
-  <table #filteredTable mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Position Column -->
     <ng-container matColumnDef="id_contenido">
       <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -71,15 +77,11 @@
     <!-- Founded Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Imagen </th>
-      <td mat-cell *matCellDef="let element"> <img style="height:50px;" src="{{element.image}}" alt="Preview"> </td>
+      <td mat-cell *matCellDef="let element"> <img style="height:50px;" src="{{element.image}}" alt="Preview">
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

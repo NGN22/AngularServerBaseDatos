@@ -30,7 +30,7 @@ export class GameFormComponent implements OnInit {
 
   extensiones =['mp3','doc','jpg', 'wav', 'mp4']
   imagenes = [{nombre: 'camara' , valor : '/assets/camara.png'},
-  {nombre: 'resproductor' , valor : '/assets/reproductor.png'},
+  {nombre: 'reproductor' , valor : '/assets/reproductor.png'},
   {nombre: 'parlante' , valor : '/assets/parlante.jpg'},
   {nombre: 'auriculares' , valor : '/assets/auriculares.png'}]
   edit: boolean = false;
