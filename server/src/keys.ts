@@ -2,9 +2,9 @@ export default {
 
     database: {
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'tpfinalbd'
+        user: 'nohely',
+        password: 'germanes100%hermoso',
+        database: 'tpfinaldb'
     }
 
 }

@@ -52,7 +52,7 @@ export class GameFormComponent implements OnInit {
           },
           err => console.log(err)
         )
-    }
+       }
   }
 
   saveNewGame() {
@@ -87,14 +87,19 @@ export class GameFormComponent implements OnInit {
   }
 
   uploadFile(){
-    console.log('aca',this.archivo)
-    this.archivo.id = this.game.id_contenido as unknown as string
-    this.fileService.cargarArchivo( this.archivo )
-    this.archivo = null
+    if(!this.edit){
+      this.archivo.id = this.game.id_contenido as unknown as string
+      this.fileService.cargarArchivo( this.archivo )
+      this.archivo = null
+    }
   }
 
 
   save(forma: NgForm): boolean{
+    if(this.edit){
+      return (forma.status == 'VALID')
+    }
+    else
     return this.archivo && (forma.status == 'VALID')
   }
 
