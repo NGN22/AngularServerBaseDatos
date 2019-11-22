@@ -22,8 +22,12 @@
               <mat-datepicker #toDate></mat-datepicker>
             </mat-form-field>
           </div>
-          <button mat-button color="primary" class="primary" (click)="applyFilter()">Filtrar</button>
+          <button [disabled]="!puedoFiltrar()" mat-button color="primary" class="primary"
+            (click)="applyFilter()">Filtrar</button>
         </form>
+        <div *ngIf="!puedoFiltrar()">
+          <p class="alert alert-danger">Verifique las fechas ingresadas</p>
+        </div>
       </div>
     </div>
   </div>
@@ -44,7 +48,7 @@
   </div>
   <div class="card">
     <div class="card-body">
-        <input (keyup)="onKey($event)" [(ngModel)]="values" placeholder="ingrese titulo a buscar">
+      <input (keyup)="onKey($event)" [(ngModel)]="values" placeholder="ingrese titulo a buscar">
     </div>
   </div>
 </div>

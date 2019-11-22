@@ -35,7 +35,7 @@ class GamesController {
         return __awaiter(this, void 0, void 0, function* () {
             //const result = yield database_1.default.query('INSERT INTO contenido set ?', [req.body]);
             console.log(req.body);
-            const result = yield database_1.default.query('CALL INS_CONTENIDO(\''+ req.body.titulo +'\', \''+ req.body.fec_publicacion +'\', \''+ req.body.extension +'\', \'descargable\', \''+ req.body.descripcion +'\', \''+ req.body.image +'\')');
+            const result = yield database_1.default.query('CALL INS_CONTENIDO(\''+ req.body.titulo +'\', \''+ req.body.fec_publicacion +'\', \''+ req.body.extension +'\', \'reproducible\', \''+ req.body.descripcion +'\', \''+ req.body.image +'\')');
             res.json({ message: 'Contenido Guardado' });
         });
     }

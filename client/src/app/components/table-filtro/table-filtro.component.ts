@@ -68,7 +68,7 @@ export class TableFiltroComponent {
   }
 
   applyFilter() {
-    this.dataSource.filter = ''
+    this.dataSource.filter = '' + Math.random();
   }
 // extension
   select(filterValue: string){
@@ -82,10 +82,14 @@ export class TableFiltroComponent {
   onKey(event: any) { // without type info
     console.log("entrada",this.values)
     this.dataSource.filterPredicate = 
-    (data: Game, filter: string) => data.titulo.indexOf(filter) != -1;
+    (data: Game, filter: string) => data.titulo.toLowerCase().indexOf(filter) != -1;
     this.values = this.values.trim(); 
     this.values = this.values.toLowerCase();
     this.dataSource.filter = this.values;
+  }
+
+  puedoFiltrar(){
+    return this.fromDate <= this.toDate
   }
  
 
