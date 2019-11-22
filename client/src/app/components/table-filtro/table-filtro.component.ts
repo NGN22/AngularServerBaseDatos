@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { Game } from 'src/app/models/Game';
 
 
 @Component({
@@ -72,7 +73,7 @@ export class TableFiltroComponent {
 // extension
   select(filterValue: string){
     this.dataSource.filterPredicate = 
-    (data: Element, filter: string) => data.extension.indexOf(filter) != -1;
+    (data: Game, filter: string) => data.extension.indexOf(filter) != -1;
     filterValue = filterValue.trim(); 
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
@@ -81,7 +82,7 @@ export class TableFiltroComponent {
   onKey(event: any) { // without type info
     console.log("entrada",this.values)
     this.dataSource.filterPredicate = 
-    (data: Element, filter: string) => data.titulo.indexOf(filter) != -1;
+    (data: Game, filter: string) => data.titulo.indexOf(filter) != -1;
     this.values = this.values.trim(); 
     this.values = this.values.toLowerCase();
     this.dataSource.filter = this.values;
