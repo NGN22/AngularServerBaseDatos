@@ -23,7 +23,7 @@ export class GameFormComponent implements OnInit {
     id_contenido: 0,
     titulo: '',
     descripcion: '',
-    fec_publicacion: new Date,
+    fec_publicacion: new Date().toISOString().slice(0, 19).replace('T', ' '),
     extension: '',
     image: '',
   };
@@ -58,7 +58,7 @@ export class GameFormComponent implements OnInit {
   saveNewGame() {
     console.log('saved')
     this.uploadFile()
-    delete this.game.fec_publicacion;
+    // delete this.game.fec_publicacion;
     delete this.game.id_contenido;
     if (this.game.image === '') {
       this.game.image = '/assets/noimage.png';
