@@ -18,7 +18,6 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class TableFiltroComponent {
 
-  // .pdf
 
   extensiones = [
     { valor: 'mp3', muestraValor: 'mp3' },
@@ -33,11 +32,14 @@ export class TableFiltroComponent {
   displayedColumns: string[] = ['id_contenido', 'titulo', 'extension', 'fec_publicacion', 'image'];
   dataSource // = new MatTableDataSource(this.games);
   pipe: DatePipe;
+  values : any
 
   filterForm = new FormGroup({
     fromDate: new FormControl(),
     toDate: new FormControl(),
   });
+
+  
 
   get fromDate() { return this.filterForm.get('fromDate').value; }
   get toDate() { return this.filterForm.get('toDate').value; }
@@ -65,6 +67,25 @@ export class TableFiltroComponent {
   }
 
   applyFilter() {
-    this.dataSource.filter = '' + Math.random();
+    this.dataSource.filter = ''
   }
+// extension
+  select(filterValue: string){
+    this.dataSource.filterPredicate = 
+    (data: Element, filter: string) => data.extension.indexOf(filter) != -1;
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+  onKey(event: any) { // without type info
+    console.log("entrada",this.values)
+    this.dataSource.filterPredicate = 
+    (data: Element, filter: string) => data.titulo.indexOf(filter) != -1;
+    this.values = this.values.trim(); 
+    this.values = this.values.toLowerCase();
+    this.dataSource.filter = this.values;
+  }
+ 
+
 }
