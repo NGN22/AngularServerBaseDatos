@@ -2,27 +2,31 @@
   <div class="card">
     <div class="card-body">
       <form (ngSubmit)="edit ? updateGame() : saveNewGame()" #forma="ngForm">
+
         <div class="form-group">
           <input type="text" name="titulo" [(ngModel)]="game.titulo" placeholder="Titulo" class="form-control" autofocus
             required minlength="5" maxlength="45">
-            
         </div>
 
-        <select [(ngModel)]="game.extension" class="form-control" type="ext" name="ext">
-          <option *ngFor="let ext of extensiones" [value]="ext">
-            {{ext}}
+        <div *ngIf="!edit">
+          <select [(ngModel)]="game.extension" class="form-control" type="ext" name="ext" required>
+            <option *ngFor="let ext of extensiones" [value]="ext">
+              {{ext}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <textarea [(ngModel)]="game.descripcion" name="descripcion" rows="2" placeholder="Descripcion"
+            class="form-control" maxlength="1000"></textarea>
+        </div>
+
+        <select [(ngModel)]="game.image" class="form-control" type="image" name="image">
+          <option *ngFor="let image of imagenes" [value]="image.valor">
+            {{image.nombre}}
           </option>
         </select>
 
-        <div class="form-group">
-          <textarea [(ngModel)]="game.descripcion" name="descripcion" rows="2" placeholder="Descripcion" class="form-control" maxlength="45"></textarea>
-        </div>
-        
-        <select [(ngModel)]="game.image" class="form-control" type="image" name="image">
-            <option *ngFor="let image of imagenes" [value]="image.valor">
-              {{image.nombre}}
-            </option>
-          </select>
         <div>
           <div class="form-group row">
             <label class="col-2 col-form-label">&nbsp;</label>
@@ -32,6 +36,9 @@
               </button>
             </div>
           </div>
+        </div>
+        <div *ngIf="!forma.valid">
+          <p>Tiene que ingresar titulo, file y extension</p>
         </div>
 
       </form>
@@ -69,7 +76,5 @@
         </div>
       </tr>
     </div>
-
-
   </div>
 </div>

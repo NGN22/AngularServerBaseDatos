@@ -23,7 +23,5 @@
   }
   
   .ng-invalid{ 
-    border: 1 px;
-    border-bottom-color: royalblue;
-    border-block-color: red;
+    border: 1 px solid red;
     }

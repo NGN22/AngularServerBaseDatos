@@ -56,7 +56,7 @@ export class GameFormComponent implements OnInit {
   }
 
   saveNewGame() {
-    console.log('saved')
+    console.log('nuevo')
     this.uploadFile()
     // delete this.game.fec_publicacion;
     delete this.game.id_contenido;
@@ -74,8 +74,8 @@ export class GameFormComponent implements OnInit {
   }
 
   updateGame() {
-    this.uploadFile();
-    //this.game.fec_publicacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log("update")
+    this.game.fec_publicacion = new Date().toISOString().slice(0, 19).replace('T', ' ');
     this.gameService.updateGame(this.game.id_contenido, this.game)
       .subscribe(
         res => {
@@ -96,11 +96,12 @@ export class GameFormComponent implements OnInit {
 
 
   save(forma: NgForm): boolean{
+    console.log(forma,forma.valid)
     if(this.edit){
-      return (forma.status == 'VALID')
+      return (forma.valid)
     }
     else
-    return this.archivo && (forma.status == 'VALID')
+    return this.archivo && (forma.valid)
   }
 
   
